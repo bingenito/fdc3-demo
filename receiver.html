@@ -2,10 +2,15 @@
     <head>
         <style>
             body { background-color: #ffffff; }
+            div.message {
+                 font-weight: bold;
+                 margin: 5px;
+            }
         </style>
     </head>
     <body>
-        <div id="statusText">Receiver</div>
+        <div id='statusText'>Receiver</div>
+        <div id='responseText'></div>
     </body>
 
     <script>
@@ -14,11 +19,15 @@
             // can provide facility to allow user to change this
             await fdc3.joinChannel('green');
 
-            fdc3.addContextListener('fdc3.instrument', instrument => {
-                alert(JSON.stringify(instrument));
-            });
+            fdc3.addContextListener('fdc3.instrument', handleContext);
+            
+            try {
+                fdc3.addIntentListener('ViewInstrument', handleContext);
+            } catch (e) {
+                console.warn('addIntentListener is not supported');
+            }
 
-            document.getElementById('statusText').innerHTML += ' ready';
+            document.getElementById('statusText').innerHTML = 'Receiver Ready';
         }
 
         (async () => {
@@ -28,5 +37,12 @@
                 window.addEventListener('fdc3Ready', async () => initFdc3());
             }
         })();
+
+        function handleContext(context) {
+            let responseElement = document.createElement('div');
+            responseElement.classList.add('message');
+            responseElement.innerHTML = JSON.stringify(context);
+            document.getElementById('responseText').appendChild(responseElement);
+        }
     </script>
 </html>
