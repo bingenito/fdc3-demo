@@ -1,0 +1,30 @@
+<html>
+    <head>
+        <style>
+            body { background-color: #ffffff; }
+        </style>
+    </head>
+    <body>
+        Receiver
+    </body>
+
+    <script>
+        async function initFdc3() {
+            // For simplicity, force channel to 'green' system channel by default.  Container
+            // can provide facility to allow user to change this
+            await fdc3.joinChannel('green');
+
+            fdc3.addContextListener('fdc3.instrument', instrument => {
+                alert(JSON.stringify(instrument));
+            });
+        }
+
+        (async () => {
+            if (window.fdc3) {
+                await initFdc3();
+            } else {
+                window.addEventListener('fdc3Ready', async () => initFdc3());
+            }
+        })();
+    </script>
+</html>

@@ -1,0 +1,40 @@
+<html>
+    <head>
+        <style>
+            body { background-color: #ffffff; }
+        </style>
+    </head>
+    <body>
+        <button onclick='sendInstrument()'>Send</button>
+    </body>
+
+    <script>
+        async function initFdc3() {
+            // For simplicity, force channel to 'green' system channel by default.  Container
+            // can provide facility to allow user to change this
+            await fdc3.joinChannel('green');
+        }
+
+        (async () => {
+            if (window.fdc3) {
+                await initFdc3();
+            } else {
+                window.addEventListener('fdc3Ready', async () => initFdc3());
+            }
+        })();
+
+        function sendInstrument() {
+            var instrument = {
+                'type': 'fdc3.instrument',
+                'name': 'Microsoft',
+                'id': {
+                    'ticker': 'MSFT',
+                    'RIC': 'MSFT.OQ',
+                    'ISIN': 'US5949181045'
+                }
+            };
+
+            fdc3.broadcast(instrument);
+        }
+    </script>
+</html>
