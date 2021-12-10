@@ -5,7 +5,7 @@
         </style>
     </head>
     <body>
-        Receiver
+        <div id="statusText">Receiver</div>
     </body>
 
     <script>
@@ -17,6 +17,8 @@
             fdc3.addContextListener('fdc3.instrument', instrument => {
                 alert(JSON.stringify(instrument));
             });
+
+            document.getElementById('statusText').innerHTML += ' ready';
         }
 
         (async () => {

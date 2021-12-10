@@ -1,6 +1,7 @@
 {
     "devtools_port": 9090,
     "runtime": {
+        "arguments": "--security-realm=platform_sender --enable-mesh",
         "version": "19.89.61.6"
     },
     "platform": {

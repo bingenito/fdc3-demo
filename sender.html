@@ -5,6 +5,7 @@
         </style>
     </head>
     <body>
+        <div id="statusText">Sender</div>
         <button onclick='sendInstrument()'>Send</button>
     </body>
 
@@ -13,6 +14,8 @@
             // For simplicity, force channel to 'green' system channel by default.  Container
             // can provide facility to allow user to change this
             await fdc3.joinChannel('green');
+
+            document.getElementById('statusText').innerHTML += ' ready';
         }
 
         (async () => {

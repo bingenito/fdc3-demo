@@ -1,10 +1,11 @@
 {
     "devtools_port": 9090,
     "runtime": {
+        "arguments": "--security-realm=platform_receiver --enable-mesh",
         "version": "19.89.61.6"
     },
     "platform": {
-        "uuid": "platform_sender",
+        "uuid": "platform_receiver",
         "autoShow": false,
         "defaultWindowOptions": {
             "fdc3InteropApi": "1.2",
@@ -19,7 +20,7 @@
         "windows": [{
             "layout": {
                 "content": [{
-                    "type": "stack",
+                    "type": "row",
                     "content": [
                         {
                             "type": "component",
